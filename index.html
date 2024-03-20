@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brain Tumor Segmentation</title>
+</head>
+<body>
+    <h1>Brain Tumor Segmentation</h1>
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".jpg, .jpeg, .png" required>
+        <button type="submit">Upload</button>
+    </form>
+    {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
+    {% if filename %}
+        <h2>Uploaded Image:</h2>
+        <img src="{{ url_for('uploaded_file', filename=filename) }}" alt="Uploaded Image">
+        <h2>Segmented Result:</h2>
+        <img src="{{ url_for('result_file', filename='result_' + filename) }}" alt="Segmented Result">
+        <p>Standard Deviation: {{ info.std }}</p>
+        <p>Area Ratio: {{ info.area_ratio }}%</p>
+        <p>Centroid : {{ info.cX }},{{ info.cY }}</p>
+    {% endif %}
+</body>
+</html>
